@@ -10,6 +10,7 @@ public abstract class Employee {
     private String adress;
     private double fundo;
     private Schedule schedule;
+    private String paymentMethod;
 
     public abstract Employee makeCopy();
 
@@ -65,5 +66,13 @@ public abstract class Employee {
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

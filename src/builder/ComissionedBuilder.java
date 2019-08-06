@@ -20,7 +20,6 @@ public class ComissionedBuilder implements EmployeeBuilder {
     @Override
     public void buildId(int total) {
         employee.setId(total);
-
     }
 
     @Override
@@ -33,6 +32,23 @@ public class ComissionedBuilder implements EmployeeBuilder {
     public void buildAdress() {
         System.out.println("Digite seu endereco:");
         employee.setAdress(input.nextLine());
+    }
+
+    @Override
+    public void buildPMethod() {
+        System.out.print("Qual metodo de pagamento que deseja?\n" +
+                "1.Cheque em maos\n" +
+                "2.Cheque pelos correios\n" +
+                "3.Deposito bancario\n");
+
+        int payMethod = except.numcheckException(1,3);
+
+        if(payMethod == 1)
+            employee.setPaymentMethod("Cheque em maos");
+        else if (payMethod == 2)
+            employee.setPaymentMethod("Cheque pelos correios");
+        else
+            employee.setPaymentMethod("Deposito bancário");
     }
 
     @Override
@@ -65,5 +81,9 @@ public class ComissionedBuilder implements EmployeeBuilder {
         System.out.println("Digite seu salario:");
         double salary = except.numcheckException(0,-1);
         employee.setFundo(salary);
+
+        System.out.println("Digite o percentual de comissao: (sem o %)");
+        double comPerc = except.numcheckException(0,100);
+        ((Comissioned)employee).setComPerc(comPerc);
     }
 }

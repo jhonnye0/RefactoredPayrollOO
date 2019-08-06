@@ -31,10 +31,12 @@ public class Acesso {
                 case 0:
                     return;
                 case 1:
-                    setTotal(1);
+                    setTotal(adm.admin(empresa.getList(), empresa.getUnion(), empresa.getAgendas(), new Manager(), time, total, empresa));
                     break;
                 case 2:
-                    getId(empresa);
+                    System.out.println("Digite seu ID:");
+                    int id = except.numcheckException(0,-1);
+                    empresa.getList().get(id);
                     break;
             }
         }
