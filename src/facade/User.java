@@ -9,6 +9,7 @@ public class User {
     static Scanner input = new Scanner(System.in);
     ExceptionCatch except = new ExceptionCatch();
 
+
     public void user(Employee usuario, Time time, Manager manager,
                      ArrayList<Schedule> agendas, OrigiCare origin, Empresa empresa) {
 

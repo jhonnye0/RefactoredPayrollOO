@@ -44,8 +44,4 @@ public class ExceptionCatch {
             }
         }
     }
-
-    public boolean check(){
-        return true;
-    }
 }

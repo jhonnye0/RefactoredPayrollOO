@@ -7,6 +7,9 @@ public class Acesso {
     private int total = 0;
     static Scanner input = new Scanner(System.in);
     ExceptionCatch except = new ExceptionCatch();
+    private Admin adm = new Admin();
+    private User user = new User();
+    private Time time = new Time();
 
     public void acess() {
 
@@ -27,10 +30,11 @@ public class Acesso {
                 case 0:
                     return;
                 case 1:
-                   setTotal(1);
-                   break;
+                    setTotal(1);
+                    break;
                 case 2:
-
+                    getId(empresa);
+                    break;
             }
         }
     }
@@ -39,7 +43,7 @@ public class Acesso {
         this.total = total;
     }
 
-    private int getId() {
+    private int getId(Empresa empresa) {
         System.out.println("Digite seu ID:");
         int id = except.numcheckException(0,-1);
 
