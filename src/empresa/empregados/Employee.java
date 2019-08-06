@@ -1,5 +1,7 @@
 package empresa.empregados;
 
+import empresa.agendas.Schedule;
+
 public abstract class Employee {
 
     private int id;
@@ -7,6 +9,7 @@ public abstract class Employee {
     private String name;
     private String adress;
     private double fundo;
+    private Schedule schedule;
 
     public abstract Employee makeCopy();
 
@@ -54,5 +57,13 @@ public abstract class Employee {
 
     public void setFundo(double fundo) {
         this.fundo = fundo;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 }

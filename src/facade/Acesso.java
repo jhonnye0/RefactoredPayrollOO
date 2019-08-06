@@ -1,5 +1,6 @@
 package facade;
 
+import empresa.agendas.Time;
 import java.util.Scanner;
 
 public class Acesso {
@@ -49,7 +50,7 @@ public class Acesso {
 
         try {
             if(empresa.getList().get(id) != null){
-                user.user(empresa.getList().get(id), time, new Manager(), empresa.getAgendas(),origin, empresa);
+                user.user(empresa.getList().get(id), time, new Manager(), empresa.getAgendas(), empresa);
             }
         }catch (Exception e){
             System.out.println("Empregado nao registrado ainda!");

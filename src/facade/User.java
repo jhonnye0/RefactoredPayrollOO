@@ -1,5 +1,7 @@
 package facade;
 
+import empresa.agendas.Schedule;
+import empresa.agendas.Time;
 import empresa.empregados.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +13,7 @@ public class User {
 
 
     public void user(Employee usuario, Time time, Manager manager,
-                     ArrayList<Schedule> agendas, OrigiCare origin, Empresa empresa) {
+                     ArrayList<Schedule> agendas, Empresa empresa) {
 
 
         while(true){

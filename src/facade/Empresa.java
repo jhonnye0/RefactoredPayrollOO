@@ -7,8 +7,6 @@ import empresa.sindicato.Union;
 
 public class Empresa {
 
-    public class Empresa {
-
         private ArrayList<Employee> list = new ArrayList<>();
         private ArrayList<Union> union = new ArrayList<>();
         private ArrayList<Schedule> agendas = new ArrayList<>();

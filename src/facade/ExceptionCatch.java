@@ -1,5 +1,9 @@
 package facade;
 
+import empresa.empregados.Employee;
+import empresa.sindicato.Union;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ExceptionCatch {
@@ -41,6 +45,40 @@ public class ExceptionCatch {
             }catch (Exception e){
                 System.out.print("Formato incorreto digite novamente..\n");
                 input.nextLine();
+            }
+        }
+    }
+
+    public void checkSynd(Employee employee, ArrayList<Union> union){
+        System.out.println("Empregado deseja filiar-se ao sindicato?" +
+                "\n[y] - yes" +
+                "\n[n] - no");
+
+        label:
+        while (true) {
+            String in = input.nextLine();
+            switch (in.intern()) {
+                case "y": {
+
+                    System.out.print("Digite a taxa sindical:\n");
+                    double synTax = numcheckException(0,-1);
+
+                    Union aux = new Union(true, synTax);
+                    union.add(employee.getId(), aux);
+
+                    employee.setUnionID(employee.getId() + 10000);
+
+                    input.nextLine();
+                    break label;
+                }
+                case "n": {
+                    Union aux = new Union(false, 0);
+                    union.add(employee.getId(), aux);
+                    break label;
+                }
+                default:
+                    System.out.println("Entrada inadequada, digite novamente..");
+                    break;
             }
         }
     }
