@@ -1,4 +1,4 @@
-package builder;
+package builder.employeeBuilder;
 
 import empresa.agendas.*;
 import empresa.empregados.*;
@@ -7,14 +7,14 @@ import facade.ExceptionCatch;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SalariedBuilder implements EmployeeBuilder{
+public class ComissionedBuilder implements EmployeeBuilder {
 
     private Employee employee;
     static Scanner input = new Scanner(System.in);
     ExceptionCatch except = new ExceptionCatch();
 
-    public SalariedBuilder() {
-        this.employee = new Salaried();
+    public ComissionedBuilder(){
+        this.employee = new Comissioned();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class SalariedBuilder implements EmployeeBuilder{
 
     @Override
     public void buildPMethod() {
-        System.out.print("Qual metodo de pagamento que deseja?\n" +
+        System.out.print("Qual metodo de pagamento que deseja?\n\n" +
                 "1.Cheque em maos\n" +
                 "2.Cheque pelos correios\n" +
                 "3.Deposito bancario\n");
@@ -52,6 +52,11 @@ public class SalariedBuilder implements EmployeeBuilder{
     }
 
     @Override
+    public void setEmployee(Employee x) {
+        employee = x.makeCopy();
+    }
+
+    @Override
     public Employee getEmployee() {
         return this.employee;
     }
@@ -63,16 +68,7 @@ public class SalariedBuilder implements EmployeeBuilder{
 
     @Override
     public void buildSchedule() {
-
-        System.out.println("Digite o metodo de pagamento:" +
-                "1.Cheque em maos\n" +
-                "2.Cheque pelos correios\n" +
-                "3.Deposito bancario\n");
-
-        int paymentMethod = except.numcheckException(1,3);
-
-        Schedule schedule = new MonthlySchedule(paymentMethod, 31);
-
+        Schedule schedule = new MonthlySchedule(employee.getPaymentMethod(),31);
         employee.setSchedule(schedule);
     }
 
@@ -80,6 +76,11 @@ public class SalariedBuilder implements EmployeeBuilder{
     public void buildSalary() {
         System.out.println("Digite seu salario:");
         double salary = except.numcheckException(0,-1);
-        employee.setFundo(salary);
+        ((Comissioned)employee).setMonthlySalary(salary);
+
+        System.out.println("Digite o percentual de comissao: (sem o %)");
+        double comPerc = except.numcheckException(0,100);
+        ((Comissioned)employee).setComPerc(comPerc);
     }
+
 }

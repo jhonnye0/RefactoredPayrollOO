@@ -17,6 +17,8 @@ public class Acesso {
         Empresa empresa = new Empresa();
         ExceptionCatch except = new ExceptionCatch();
 
+        //UNDO-REDO
+
         while (true)
         {
             System.out.println("\n----------------------------------\n");
@@ -34,9 +36,7 @@ public class Acesso {
                     setTotal(adm.admin(empresa.getList(), empresa.getUnion(), empresa.getAgendas(), new Manager(), time, total, empresa));
                     break;
                 case 2:
-                    System.out.println("Digite seu ID:");
-                    int id = except.numcheckException(0,-1);
-                    empresa.getList().get(id);
+                    getId(empresa);
                     break;
             }
         }

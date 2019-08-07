@@ -2,7 +2,7 @@ package empresa.empregados;
 
 public class Salaried extends Employee{
 
-    private int monthlySalary;
+    private double monthlySalary;
 
     @Override
     public Employee makeCopy(){
@@ -34,11 +34,11 @@ public class Salaried extends Employee{
         System.out.println("Voce nao esta permitido executar essa operacao");
     }
 
-    public int getMonthlySalary() {
+    public double getMonthlySalary() {
         return monthlySalary;
     }
 
-    public void setMonthlySalary(int monthlySalary) {
+    public void setMonthlySalary(double monthlySalary) {
         this.monthlySalary = monthlySalary;
     }
 

@@ -10,9 +10,9 @@ public class WeeklySchedule implements empresa.agendas.Schedule {
     static Scanner input = new Scanner(System.in);
     private int frequence;
     private int dayWeek;
-    private int paymentMethod;
+    private String paymentMethod;
 
-    public WeeklySchedule(int paymentMethod, int frequence, int dayWeek) {
+    public WeeklySchedule(String paymentMethod, int frequence, int dayWeek) {
         this.paymentMethod = paymentMethod;
         this.frequence = frequence;
         this.dayWeek = dayWeek;
@@ -38,11 +38,11 @@ public class WeeklySchedule implements empresa.agendas.Schedule {
         this.dayWeek = dayWeek;
     }
 
-    public int getPaymentMethod() {
+    public String getPaymentMethod() {
         return this.paymentMethod;
     }
 
-    public void setPaymentMethod(int paymentMethod) {
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -87,7 +87,7 @@ public class WeeklySchedule implements empresa.agendas.Schedule {
                 input.nextLine();
             }
         }
-        WeeklySchedule aux = new WeeklySchedule(0, frequence, dayweek);
+        WeeklySchedule aux = new WeeklySchedule("Não tem", frequence, dayweek);
         agendas.add(aux);
     }
 
@@ -184,11 +184,6 @@ public class WeeklySchedule implements empresa.agendas.Schedule {
 //            }
 //        }
 //    }
-
-    @Override
-    public int checkValid() {
-        return 0;
-    }
 
     @Override
     public String toString() {

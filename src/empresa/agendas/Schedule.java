@@ -6,13 +6,15 @@ import java.util.ArrayList;
 
 public interface Schedule {
 
-    int getPaymentMethod();
+    String getPaymentMethod();
 
-    void setPaymentMethod(int paymentMethod);
+    void setFrequence(int frequence);
 
-    int checkValid();
+    void setDayWeek(int dayWeek);
 
-    void createNewSchedule(ArrayList<Schedule> agendas);
+    void setPayday(int payday);
+
+    void setPaymentMethod(String paymentMethod);
 
     void changeSchedule(ArrayList<Schedule> agendas, Employee x, int num);
 

@@ -1,4 +1,4 @@
-package builder;
+package builder.employeeBuilder;
 
 import empresa.agendas.*;
 import empresa.empregados.*;
@@ -7,20 +7,19 @@ import facade.ExceptionCatch;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class HourlyBuilder implements EmployeeBuilder {
+public class SalariedBuilder implements EmployeeBuilder{
 
     private Employee employee;
     static Scanner input = new Scanner(System.in);
     ExceptionCatch except = new ExceptionCatch();
 
-    public HourlyBuilder(){
-        this.employee = new Hourly();
+    public SalariedBuilder() {
+        this.employee = new Salaried();
     }
 
     @Override
     public void buildId(int total) {
         employee.setId(total);
-
     }
 
     @Override
@@ -53,6 +52,11 @@ public class HourlyBuilder implements EmployeeBuilder {
     }
 
     @Override
+    public void setEmployee(Employee x) {
+        employee = x.makeCopy();
+    }
+
+    @Override
     public Employee getEmployee() {
         return this.employee;
     }
@@ -64,24 +68,14 @@ public class HourlyBuilder implements EmployeeBuilder {
 
     @Override
     public void buildSchedule() {
-
-        System.out.println("Digite o metodo de pagamento:" +
-                "1.Cheque em maos\n" +
-                "2.Cheque pelos correios\n" +
-                "3.Deposito bancario\n");
-
-        int paymentMethod = except.numcheckException(1,3);
-
-        Schedule schedule = new WeeklySchedule(paymentMethod,1,6);
-
+        Schedule schedule = new MonthlySchedule(employee.getPaymentMethod(), 31);
         employee.setSchedule(schedule);
     }
 
     @Override
     public void buildSalary() {
-        System.out.println("Digite seu salario/hora:");
+        System.out.println("Digite seu salario:");
         double salary = except.numcheckException(0,-1);
-        employee.setFundo(salary);
+        ((Salaried)employee).setMonthlySalary(salary);
     }
-
 }

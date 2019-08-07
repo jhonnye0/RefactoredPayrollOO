@@ -6,10 +6,10 @@ import java.util.Scanner;
 public class MonthlySchedule implements Schedule
 {
     static Scanner input = new Scanner(System.in);
-    private int paymentMethod;
+    private String paymentMethod;
     private int payday;
 
-    public MonthlySchedule(int paymentMethod, int payday) {
+    public MonthlySchedule(String paymentMethod, int payday) {
         this.paymentMethod = paymentMethod;
         this.payday = payday;
     }
@@ -22,11 +22,21 @@ public class MonthlySchedule implements Schedule
         this.payday = payday;
     }
 
-    public int getPaymentMethod() {
+    public String getPaymentMethod() {
         return this.paymentMethod;
     }
 
-    public void setPaymentMethod(int paymentMethod) {
+    @Override
+    public void setFrequence(int frequence) {
+
+    }
+
+    @Override
+    public void setDayWeek(int dayWeek) {
+
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -34,14 +44,6 @@ public class MonthlySchedule implements Schedule
     public String toString()
     {
         return "Agenda:\n" + "Mensal " + payday;
-    }
-
-    public void createNewSchedule(ArrayList<Schedule> agendas) {
-
-        System.out.println("Qual o dia do pagamento?");
-        int valid = checkValid();
-        MonthlySchedule aux = new MonthlySchedule(0, valid);
-        agendas.add(aux);
     }
 
     @Override
@@ -52,24 +54,6 @@ public class MonthlySchedule implements Schedule
     @Override
     public void roolSheet(ArrayList<Employee> list, int day, int week) {
 
-    }
-
-    public int checkValid() {
-        String valid;
-
-        while (true) {
-            try{
-                valid = input.nextLine();
-
-                if(valid.equals("$")) return 31;
-                else if ((Integer.parseInt(valid) >= 0 && Integer.parseInt(valid) <= 31)) {
-                    return Integer.parseInt(valid);
-                }
-                else System.out.println("Intervalo inadequado, digite novamente..");
-            }catch (Exception e){
-                System.out.println("Tipo inadequado digite novamente!");
-            }
-        }
     }
 
     //    public void changeSchedule(ArrayList<Schedule> agendas, Employee x, int num){

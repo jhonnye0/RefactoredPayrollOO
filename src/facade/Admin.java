@@ -1,5 +1,9 @@
 package facade;
 
+import builder.scheduleBuilder.MonthlySBuilder;
+import builder.scheduleBuilder.ScheduleBuilder;
+import builder.scheduleBuilder.ScheduleEngineer;
+import builder.scheduleBuilder.WeeklySBuilder;
 import empresa.agendas.MonthlySchedule;
 import empresa.agendas.Schedule;
 import empresa.agendas.Time;
@@ -52,6 +56,9 @@ public class Admin {
                     manager.add(list, union, total);
                     total += 1;
                     save = 1;
+
+                    System.out.print("\nDIGITE ENTER PARA CONTINUAR\n");
+                    input.nextLine();
                     break;
                 case 2:
                     System.out.println("Digite seu ID:");
@@ -77,13 +84,13 @@ public class Admin {
                     System.out.print("Qual o ID do empregado?\n");
                     id = except.numcheckException(0,-1);
                     if (manager.haveEmp(list, id)) {
-                        //manager.updateEmployee(list, union, id, total);
+                        manager.update(list, union, id);
                         save = 1;
                     }
                     break;
                 case 5:
-                    WeeklySchedule x = new WeeklySchedule(0,0,0);
-                    MonthlySchedule y = new MonthlySchedule(0,0);
+                    WeeklySchedule x = new WeeklySchedule("Nao tem",0,0);
+                    MonthlySchedule y = new MonthlySchedule("Nao tem",0);
                     System.out.println("Semanais:");
                     x.roolSheet(list, time.getDAY(), time.getWEEK());
                     System.out.println("------------------------------\n" +
@@ -95,13 +102,18 @@ public class Admin {
                     System.out.println("Que tipo de agenda deseja criar?");
                     System.out.println("1 - Mensal / 2 - Semanal");
                     int num = except.numcheckException(1,2);
-                    if (num == 1) {
-                        MonthlySchedule a = new MonthlySchedule(0, 0);
-                        a.createNewSchedule(agendas);
-                    } else if (num == 2) {
-                        WeeklySchedule a = new WeeklySchedule(0, 0, 0);
-                        a.createNewSchedule(agendas);
+
+                    ScheduleEngineer sEngineer = null;
+
+                    if(num == 1){
+                        sEngineer = new ScheduleEngineer(new MonthlySBuilder());
+                    }else if(num == 2) {
+                        sEngineer = new ScheduleEngineer(new WeeklySBuilder());
                     }
+
+                    sEngineer.construct();
+                    agendas.add(sEngineer.getSchedule());
+
                     input.nextLine();
                     System.out.print("Agenda criada com sucesso..\n");
 

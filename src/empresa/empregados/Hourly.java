@@ -4,7 +4,7 @@ import empresa.agendas.Schedule;
 
 public class Hourly extends Employee{
 
-    private int hourlyWage;
+    private double hourlyWage;
 
     @Override
     public Employee makeCopy(){
@@ -50,11 +50,11 @@ public class Hourly extends Employee{
                 "\nTotal: " + super.getFundo() + "\n";
     }
 
-    public int getHourlyWage() {
+    public double getHourlyWage() {
         return hourlyWage;
     }
 
-    public void setHourlyWage(int hourlyWage) {
+    public void setHourlyWage(double hourlyWage) {
         this.hourlyWage = hourlyWage;
     }
 }

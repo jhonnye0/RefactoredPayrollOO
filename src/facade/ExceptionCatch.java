@@ -54,6 +54,7 @@ public class ExceptionCatch {
                 "\n[y] - yes" +
                 "\n[n] - no");
 
+        input.nextLine();
         label:
         while (true) {
             String in = input.nextLine();
@@ -74,6 +75,7 @@ public class ExceptionCatch {
                 case "n": {
                     Union aux = new Union(false, 0);
                     union.add(employee.getId(), aux);
+                    System.out.println("Nao registrado no sindicato");
                     break label;
                 }
                 default:

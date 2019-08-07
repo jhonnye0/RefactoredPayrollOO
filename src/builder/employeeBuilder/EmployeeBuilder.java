@@ -1,4 +1,4 @@
-package builder;
+package builder.employeeBuilder;
 
 import empresa.empregados.Employee;
 import empresa.sindicato.Union;
@@ -19,6 +19,8 @@ public interface EmployeeBuilder {
     void buildAdress();
 
     void buildPMethod();
+
+    void setEmployee(Employee x);
 
     Employee getEmployee();
 
