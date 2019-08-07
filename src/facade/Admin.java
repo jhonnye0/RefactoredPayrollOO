@@ -1,13 +1,7 @@
 package facade;
 
-import builder.scheduleBuilder.MonthlySBuilder;
-import builder.scheduleBuilder.ScheduleBuilder;
-import builder.scheduleBuilder.ScheduleEngineer;
-import builder.scheduleBuilder.WeeklySBuilder;
-import empresa.agendas.MonthlySchedule;
-import empresa.agendas.Schedule;
-import empresa.agendas.Time;
-import empresa.agendas.WeeklySchedule;
+import builder.scheduleBuilder.*;
+import empresa.agendas.*;
 import empresa.empregados.Employee;
 import empresa.sindicato.Union;
 
