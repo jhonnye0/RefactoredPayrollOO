@@ -51,9 +51,8 @@ public class MonthlySchedule implements Schedule
 
     }
 
-    @Override
-    public void roolSheet(ArrayList<Employee> list, int day, int week) {
-
+    public boolean checkIfisToPay(int day, int week){
+        return ;
     }
 
     //    public void changeSchedule(ArrayList<Schedule> agendas, Employee x, int num){

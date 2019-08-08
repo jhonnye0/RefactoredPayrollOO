@@ -25,7 +25,8 @@ public class Acesso {
             System.out.println("\nModo de acesso: (Digite o numero)\n" +
                     "0. Encerrar acesso\n" +
                     "1. Admin\n" +
-                    "2. Empregado\n");
+                    "2. Empregado\n" +
+                    "3. Setar Tempo\n");
 
             int op = except.numcheckException(0,2);
 
@@ -37,6 +38,9 @@ public class Acesso {
                     break;
                 case 2:
                     getId(empresa);
+                    break;
+                case 3:
+                    time.Do();
                     break;
             }
         }

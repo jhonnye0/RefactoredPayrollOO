@@ -1,11 +1,10 @@
 package empresa.agendas;
 
 import empresa.empregados.Employee;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class WeeklySchedule implements empresa.agendas.Schedule {
+public class WeeklySchedule extends Schedule {
 
     static Scanner input = new Scanner(System.in);
     private int frequence;
@@ -38,12 +37,11 @@ public class WeeklySchedule implements empresa.agendas.Schedule {
         this.dayWeek = dayWeek;
     }
 
-    public String getPaymentMethod() {
-        return this.paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public boolean checkIfisToPay(int day, int week){
+        if(getFrequence()%week == 0){
+            if(getDayWeek() == day) return true;
+        }
+        return false;
     }
 
     public void createNewSchedule(ArrayList<empresa.agendas.Schedule> agendas){
@@ -93,11 +91,6 @@ public class WeeklySchedule implements empresa.agendas.Schedule {
 
     @Override
     public void changeSchedule(ArrayList<Schedule> agendas, Employee x, int num) {
-        
-    }
-
-    @Override
-    public void roolSheet(ArrayList<Employee> list, int day, int week) {
 
     }
 

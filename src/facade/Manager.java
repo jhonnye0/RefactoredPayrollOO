@@ -94,4 +94,15 @@ public class Manager {
             }else break;
         }
     }
+
+    public void printAllEmployee(ArrayList<Employee> list, ArrayList<Union> union){
+        int valid = -1;
+        int i;
+        for (i = 0; i < list.size(); i++) {
+            valid++;
+            printEmployee(list, union, i);
+        }
+        if (valid == -1)
+            System.out.println("Nao ha empregados registrados..");
+    }
 }
