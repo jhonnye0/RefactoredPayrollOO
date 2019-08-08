@@ -19,7 +19,9 @@ public class ExceptionCatch {
             while(true){
                 try {
                     num = input.nextInt();
-                    if(limInf <= num && num <= limSup) return num;
+                    input.nextLine();
+                    if(limInf <= num && num <= limSup)
+                        return num;
                     else {
                         System.out.println("Fora do intervalo.. digite novamente");
                     }
@@ -38,7 +40,9 @@ public class ExceptionCatch {
         while(true){
             try {
                 num = input.nextDouble();
-                if(limInf <= num && num <= limSup) return num;
+                input.nextLine();
+                if(limInf <= num && num <= limSup)
+                    return num;
                 else {
                     System.out.println("Fora do intervalo.. digite novamente");
                 }
@@ -53,8 +57,6 @@ public class ExceptionCatch {
         System.out.println("Empregado deseja filiar-se ao sindicato?" +
                 "\n[y] - yes" +
                 "\n[n] - no");
-
-        input.nextLine();
         label:
         while (true) {
             String in = input.nextLine();
@@ -66,10 +68,7 @@ public class ExceptionCatch {
 
                     Union aux = new Union(true, synTax);
                     union.add(employee.getId(), aux);
-
                     employee.setUnionID(employee.getId() + 10000);
-
-                    input.nextLine();
                     break label;
                 }
                 case "n": {

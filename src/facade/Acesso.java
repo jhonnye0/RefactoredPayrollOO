@@ -26,9 +26,9 @@ public class Acesso {
                     "0. Encerrar acesso\n" +
                     "1. Admin\n" +
                     "2. Empregado\n" +
-                    "3. Setar Tempo\n");
+                    "3. Setar/Checar Tempo\n");
 
-            int op = except.numcheckException(0,2);
+            int op = except.numcheckException(0,3);
 
             switch (op){
                 case 0:

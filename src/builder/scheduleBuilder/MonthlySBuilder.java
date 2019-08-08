@@ -14,7 +14,7 @@ public class MonthlySBuilder implements ScheduleBuilder{
     public void buildPayday() {
         System.out.println("Qual o dia do pagamento?");
         int valid = checkValid();
-        MonthlySchedule aux = new MonthlySchedule("Não tem", valid);
+        schedule = new MonthlySchedule("Não tem", valid);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Time {
         if(operation == 1){
             setTime();
         }else if(operation == 2){
-            toString();
+            System.out.println(toString());
         }else {
             setEscTime();
         }
@@ -56,7 +56,7 @@ public class Time {
     public String toString(){
         return "\nHour: " + getHOUR() +
                 "\nDay: " + getDAY() +
-                "\nWeek: " + getWEEK() + "\n";
+                "\nWeek: " + getWEEK();
     }
 
     public int getHOUR() {
@@ -65,9 +65,9 @@ public class Time {
 
     public void setHOUR() {
 
-        System.out.println("Quantas horas deseja passar?");
-        int n = except.numcheckException(0,-1);
-        Time.HOUR += HOUR;
+        System.out.println("Qual hora deseja?");
+
+        Time.HOUR = except.numcheckException(0,-1);
         Time.HOUR %= 24;
         if(Time.HOUR == 0) DAY++;
         DAY %= 365;
@@ -78,10 +78,9 @@ public class Time {
 
     public void setDAY() {
 
-        System.out.println("Quantos dias deseja passar?");
-        int n = except.numcheckException(0,-1);
+        System.out.println("Qual dia voce deseja?");
 
-        Time.DAY += DAY;
+        Time.DAY = except.numcheckException(0,-1);
         DAY %= 365;
         WEEK = DAY/7;
 
@@ -99,8 +98,7 @@ public class Time {
     public void setWEEK() {
 
         System.out.println("Quantas semanas deseja passar?");
-        int n = except.numcheckException(0,-1);
-        Time.WEEK += WEEK;
+        Time.WEEK = except.numcheckException(0,-1);;
 
         System.out.println("Semana(s) passadas com sucesso.");
     }

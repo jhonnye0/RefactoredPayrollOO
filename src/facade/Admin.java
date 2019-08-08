@@ -14,6 +14,7 @@ public class Admin {
     ExceptionCatch except = new ExceptionCatch();
 
     private int save = 0;
+
     public int admin(ArrayList<Employee> list, ArrayList<Union> union,
                      ArrayList<Schedule> agendas, Manager manager, Time time,
                      int total, Empresa empresa) {
@@ -31,7 +32,7 @@ public class Admin {
                     "7. Checar os empregados registrados na empresa\n" +
                     "8. Desfazer operacao /  Refazer operacao\n");
 
-            int operation = except.numcheckException(0,11);
+            int operation = except.numcheckException(0,8);
 
 //            if (save == 1){
 //                originator.setState(list, union);
@@ -44,7 +45,7 @@ public class Admin {
                 case 0:
                     return total;
                 case 1:
-                    manager.add(list, union, total);
+                    manager.add(empresa.getList(), empresa.getUnion(), total);
                     total += 1;
                     save = 1;
 
@@ -55,8 +56,8 @@ public class Admin {
                     System.out.println("Digite seu ID:");
                     int id = except.numcheckException(0,-1);
 
-                    if(manager.haveEmp(list, id)){
-                        manager.remove(list, union, id, total);
+                    if(manager.haveEmp(empresa.getList(), id)){
+                        manager.remove(empresa.getList(), empresa.getUnion(), id, total);
                         save = 1;
                     }
                     break;
@@ -66,22 +67,22 @@ public class Admin {
                     System.out.print("Qual o ID do empregado?\n");
                     id = except.numcheckException(0,-1);
 
-                    if (manager.haveEmp(list, id)) {
-                        Union.lauchFee(list, id, tax);
+                    if (manager.haveEmp(empresa.getList(), id)) {
+                        Union.lauchFee(empresa.getList(), id, tax);
                         save = 1;
                     }
                     break;
                 case 4:
                     System.out.print("Qual o ID do empregado?\n");
                     id = except.numcheckException(0,-1);
-                    if (manager.haveEmp(list, id)) {
-                        manager.update(list, union, id);
+                    if (manager.haveEmp(empresa.getList(), id)) {
+                        manager.update(empresa.getList(), union, id);
                         save = 1;
                     }
                     break;
                 case 5:
                     Schedule schedule = new MonthlySchedule("0",0);
-                    schedule.roolSheet(list, time.getDAY(), time.getWEEK());
+                    schedule.roolSheet(empresa.getList(), time.getDAY(), time.getWEEK());
 
                     System.out.println("------------------------------\n" +
                             "Mensais:");
@@ -104,7 +105,6 @@ public class Admin {
                     sEngineer.construct();
                     agendas.add(sEngineer.getSchedule());
 
-                    input.nextLine();
                     System.out.print("Agenda criada com sucesso..\n");
 
                     System.out.println("Digite ENTER:");

@@ -3,7 +3,7 @@ import empresa.empregados.Employee;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MonthlySchedule implements Schedule
+public class MonthlySchedule extends Schedule
 {
     static Scanner input = new Scanner(System.in);
     private String paymentMethod;
@@ -47,12 +47,19 @@ public class MonthlySchedule implements Schedule
     }
 
     @Override
-    public void changeSchedule(ArrayList<Schedule> agendas, Employee x, int num) {
+    public void showSchedules(ArrayList<Schedule> agendas) {
 
+        for(Schedule e : agendas){
+            if(e instanceof MonthlySchedule){
+                System.out.println("ID - [" + agendas.indexOf(e) + "]\n" + e.toString());
+            }
+        }
     }
 
     public boolean checkIfisToPay(int day, int week){
-        return ;
+        if(day == getPayday()) return true;
+
+        return false;
     }
 
     //    public void changeSchedule(ArrayList<Schedule> agendas, Employee x, int num){
@@ -92,26 +99,4 @@ public class MonthlySchedule implements Schedule
     public MonthlySchedule makeCopy(){
         return new MonthlySchedule(this.paymentMethod, this.payday);
     }
-
-    //    public void roolSheet(ArrayList<Employee> list, int day, int week) {
-//
-//        for (Employee e : list) {
-//
-//            String Pm;
-//            if (e.getpayMSchedule() == 1)
-//                Pm = "Cheque em maos";
-//            else if (e.getpayMSchedule() == 2)
-//                Pm = "Cheque pelos correios";
-//            else
-//                Pm = "Deposito bancario";
-//
-//            if (e.getSchedule() instanceof MonthlySchedule) {
-//                if (day == ((empresa.agendas.MonthlySchedule) e.getSchedule()).getPayday()) {
-//                    System.out.println("Employee de ID [" + e.getId() + "]\n" +
-//                            "Foi pago atraves de: " + Pm);
-//                    System.out.println("--------------------------------");
-//                }
-//            }
-//        }
-//    }
 }

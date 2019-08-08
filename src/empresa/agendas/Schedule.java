@@ -1,11 +1,12 @@
 package empresa.agendas;
 
 import empresa.empregados.Employee;
-
+import facade.ExceptionCatch;
 import java.util.ArrayList;
 
 public abstract class Schedule {
 
+    ExceptionCatch except = new ExceptionCatch();
     private String paymentMethod;
 
     public String getPaymentMethod() {
@@ -22,24 +23,31 @@ public abstract class Schedule {
 
     public abstract void setPayday(int payday);
 
+    public abstract void showSchedules(ArrayList<Schedule> agendas);
+
     public abstract boolean checkIfisToPay(int day, int week);
 
-    public void changeSchedule(ArrayList<Schedule> agendas, Employee x, int num) {
+    public void changeSchedule(ArrayList<Schedule> agendas, Employee x){
 
+        System.out.println("Escolha o ID indicado da agenda que deseja:");
+        showSchedules(agendas);
+        int num = except.numcheckException(0,agendas.size()-1);
+
+        x.setSchedule(agendas.get(num));
     }
 
     public void roolSheet(ArrayList<Employee> list, int day, int week) {
-        for (Employee e : list) {
 
+        for (Employee e : list) {
             if (e.getSchedule().checkIfisToPay(day, week)) {
 
                 e.setFundo(0);
                 System.out.println("Employee de ID [" + e.getId() + "]\n" +
-                        "Foi pago atraves de: " + paymentMethod);
+                        "Foi pago atraves de: " + e.getPaymentMethod());
                 System.out.println("--------------------------------");
             }
         }
     }
 
-        public abstract Schedule makeCopy();
+    public abstract Schedule makeCopy();
 }

@@ -1,8 +1,11 @@
 package empresa.empregados;
 
+import empresa.empregados.comission.Sells;
+
 public class Comissioned extends Salaried{
 
     private double comPerc;
+    private Sells sells;
 
     @Override
     public Employee makeCopy(){
@@ -27,9 +30,8 @@ public class Comissioned extends Salaried{
         return 0;
     }
 
-    @Override
-    public void registerSale() {
-
+    public void registerSale(int day, double sale){
+        this.sells.registerSale(day, sale);
     }
 
     @Override

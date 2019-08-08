@@ -9,6 +9,7 @@ public class WeeklySchedule extends Schedule {
     static Scanner input = new Scanner(System.in);
     private int frequence;
     private int dayWeek;
+    private String dW;
     private String paymentMethod;
 
     public WeeklySchedule(String paymentMethod, int frequence, int dayWeek) {
@@ -27,6 +28,32 @@ public class WeeklySchedule extends Schedule {
 
     public void setFrequence(int frequence) {
         this.frequence = frequence;
+        this.dW = null;
+        switch (this.dayWeek) {
+            case 1:
+                dW = "Domingo";
+                break;
+            case 2:
+                dW = "Segunda";
+                break;
+            case 3:
+                dW = "Terça";
+                break;
+            case 4:
+                dW = "Quarta";
+                break;
+            case 5:
+                dW = "Quinta";
+                break;
+            case 6:
+                dW = "Sexta";
+                break;
+            case 7:
+                dW = "Sábado";
+                break;
+            default:
+                break;
+        }
     }
 
     public int getDayWeek() {
@@ -35,6 +62,21 @@ public class WeeklySchedule extends Schedule {
 
     public void setDayWeek(int dayWeek) {
         this.dayWeek = dayWeek;
+    }
+
+    @Override
+    public void setPayday(int payday) {
+
+    }
+
+    @Override
+    public void showSchedules(ArrayList<Schedule> agendas) {
+
+        for(Schedule e : agendas){
+            if(e instanceof WeeklySchedule){
+                System.out.println("ID - [" + agendas.indexOf(e) + "]\n" + e.toString());
+            }
+        }
     }
 
     public boolean checkIfisToPay(int day, int week){
@@ -89,15 +131,10 @@ public class WeeklySchedule extends Schedule {
         agendas.add(aux);
     }
 
-    @Override
-    public void changeSchedule(ArrayList<Schedule> agendas, Employee x, int num) {
-
-    }
-
 //    public void changeSchedule(ArrayList<empresa.agendas.Schedule> agendas, Employee x, int num){
 //        int valid = 0;
 //        int cont = 0;
-//        for (empresa.agendas.Schedule e : agendas) {
+//        for (Schedule e : agendas) {
 //            if (e instanceof WeeklySchedule) {
 //                String dW = null;
 //                valid = 1;
@@ -155,57 +192,8 @@ public class WeeklySchedule extends Schedule {
 //        }
 //    }
 
-//    public void roolSheet(ArrayList<Employee> list, int day, int week){
-//        for (Employee e : list) {
-//
-//            String Pm;
-//            if (e.getpayMSchedule() == 1)
-//                Pm = "Cheque em maos";
-//            else if (e.getpayMSchedule() == 2)
-//                Pm = "Cheque pelos correios";
-//            else
-//                Pm = "Deposito bancario";
-//
-//            if(e.getSchedule() instanceof WeeklySchedule){
-//                if(((WeeklySchedule) e.getSchedule()).getFrequence()%week == 0){
-//                    if (day == ((WeeklySchedule) e.getSchedule()).getDayWeek()){
-//                        System.out.println("Employee de ID [" + e.getId() +"]\n" +
-//                                "Foi pago atraves de: " + Pm);
-//                        System.out.println("--------------------------------");
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     @Override
     public String toString() {
-        String dW = null;
-        switch (this.dayWeek) {
-            case 1:
-                dW = "Domingo";
-                break;
-            case 2:
-                dW = "Segunda";
-                break;
-            case 3:
-                dW = "Terça";
-                break;
-            case 4:
-                dW = "Quarta";
-                break;
-            case 5:
-                dW = "Quinta";
-                break;
-            case 6:
-                dW = "Sexta";
-                break;
-            case 7:
-                dW = "Sábado";
-                break;
-            default:
-                break;
-        }
-        return "Agenda:\n" + "Semanal " + this.frequence + " " + dW;
+        return "Agenda:\n" + "Semanal " + this.frequence + " " + this.dW;
     }
 }
