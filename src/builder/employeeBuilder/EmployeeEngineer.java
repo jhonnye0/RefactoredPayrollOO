@@ -1,6 +1,8 @@
 package builder.employeeBuilder;
 
 import empresa.empregados.*;
+import empresa.empregados.comission.Comissioned;
+import empresa.empregados.point.Hourly;
 import empresa.sindicato.Union;
 import facade.ExceptionCatch;
 import java.util.*;

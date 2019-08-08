@@ -1,9 +1,12 @@
-package empresa.empregados;
+package empresa.empregados.comission;
 
-import empresa.empregados.comission.Sells;
+import empresa.agendas.Time;
+import empresa.empregados.*;
+import facade.ExceptionCatch;
 
-public class Comissioned extends Salaried{
+public class Comissioned extends Salaried {
 
+    ExceptionCatch except = new ExceptionCatch();
     private double comPerc;
     private Sells sells;
 
@@ -30,8 +33,12 @@ public class Comissioned extends Salaried{
         return 0;
     }
 
-    public void registerSale(int day, double sale){
-        this.sells.registerSale(day, sale);
+    public void registerSale(Time time){
+
+        System.out.println("Digite o preco da venda:");
+        double sale = except.numcheckException(0,-1);
+
+        this.sells.registerSale(time.getDAY(), sale);
     }
 
     @Override

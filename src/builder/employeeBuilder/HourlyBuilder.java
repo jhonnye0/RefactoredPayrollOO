@@ -2,6 +2,7 @@ package builder.employeeBuilder;
 
 import empresa.agendas.*;
 import empresa.empregados.*;
+import empresa.empregados.point.Hourly;
 import empresa.sindicato.Union;
 import facade.ExceptionCatch;
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 package empresa.empregados;
 
 import empresa.agendas.Schedule;
+import empresa.agendas.Time;
 
 public abstract class Employee {
 
@@ -16,9 +17,9 @@ public abstract class Employee {
 
     public abstract double calcSalary();
 
-    public abstract void registerSale();
+    public abstract void registerSale(Time time);
 
-    public abstract void registerPoint();
+    public abstract void registerPoint(Time time);
 
     public int getId() {
         return id;

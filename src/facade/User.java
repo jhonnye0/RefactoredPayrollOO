@@ -13,10 +13,8 @@ public class User {
     static Scanner input = new Scanner(System.in);
     ExceptionCatch except = new ExceptionCatch();
 
-
     public void user(Employee usuario, Time time, Manager manager,
                      ArrayList<Schedule> agendas, Empresa empresa) {
-
 
         while(true){
 
@@ -34,26 +32,28 @@ public class User {
                 case 0:
                     return;
                 case 1:
-                    usuario.registerSale();
+                    usuario.registerSale(time);
                     break;
                 case 2:
-                    usuario.registerPoint();
+                    usuario.registerPoint(time);
                     break;
                 case 3:
-                    System.out.println("\nDigite o número da agenda que deseja:\n" +
-                            "1. Mensal\n" +
-                            "2. Semanal\n");
-
-                    Schedule schedule = null;
-                    int num = except.numcheckException(1,2);
-
-                    if (num == 1){
-                        schedule = new MonthlySchedule("0", 0);
-                    }else schedule = new WeeklySchedule("0", 0, 0);
-
+                    Schedule schedule = selectSchedule();
                     schedule.changeSchedule(agendas, usuario);
                     break;
             }
         }
+    }
+
+    public Schedule selectSchedule(){
+        System.out.println("\nDigite o número da agenda que deseja:\n" +
+                "1. Mensal\n" +
+                "2. Semanal\n");
+
+        int num = except.numcheckException(1,2);
+
+        if (num == 1){
+            return new MonthlySchedule("0", 0);
+        }else return new WeeklySchedule("0", 0, 0);
     }
 }

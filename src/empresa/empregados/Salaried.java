@@ -1,5 +1,7 @@
 package empresa.empregados;
 
+import empresa.agendas.Time;
+
 public class Salaried extends Employee{
 
     private double monthlySalary;
@@ -25,12 +27,12 @@ public class Salaried extends Employee{
     }
 
     @Override
-    public void registerSale() {
+    public void registerSale(Time time) {
         System.out.println("Voce nao esta permitido executar essa operacao");
     }
 
     @Override
-    public void registerPoint() {
+    public void registerPoint(Time time) {
         System.out.println("Voce nao esta permitido executar essa operacao");
     }
 
