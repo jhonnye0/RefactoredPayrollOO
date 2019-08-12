@@ -1,6 +1,8 @@
 package facade;
 
 import empresa.agendas.Time;
+import memento.*;
+
 import java.util.Scanner;
 
 public class Acesso {
@@ -11,13 +13,15 @@ public class Acesso {
     private Admin adm = new Admin();
     private User user = new User();
     private Time time = new Time();
+    private CareTaker careTaker = new CareTaker();
+    private ReCareTaker reCareTaker = new ReCareTaker();
+    private Originator originator;
 
     public void acess() {
 
         Empresa empresa = new Empresa();
         ExceptionCatch except = new ExceptionCatch();
-
-        //UNDO-REDO
+        originator = new Originator(new Memento(empresa.getList(), empresa.getUnion()));
 
         while (true)
         {
@@ -34,7 +38,7 @@ public class Acesso {
                 case 0:
                     return;
                 case 1:
-                    setTotal(adm.admin(empresa.getList(), empresa.getUnion(), empresa.getAgendas(), new Manager(), time, total, empresa));
+                    setTotal(adm.admin(new Manager(), time, total, empresa, careTaker, reCareTaker, originator));
                     break;
                 case 2:
                     getId(empresa);
@@ -56,7 +60,7 @@ public class Acesso {
 
         try {
             if(empresa.getList().get(id) != null){
-                user.user(empresa.getList().get(id), time, new Manager(), empresa.getAgendas(), empresa);
+                user.user(empresa.getList().get(id), time, new Manager(), empresa, careTaker, reCareTaker, originator);
             }
         }catch (Exception e){
             System.out.println("Empregado nao registrado ainda!");

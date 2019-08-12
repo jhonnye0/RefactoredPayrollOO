@@ -67,13 +67,16 @@ public class ExceptionCatch {
                     double synTax = numcheckException(0,-1);
 
                     Union aux = new Union(true, synTax);
-                    union.add(employee.getId(), aux);
-                    employee.setUnionID(employee.getId() + 10000);
+                    union.add(aux);
+                    employee.setUnionID(union.indexOf(aux) + 10000);
+                    employee.setUnion(true);
                     break label;
                 }
                 case "n": {
                     Union aux = new Union(false, 0);
-                    union.add(employee.getId(), aux);
+                    union.add(aux);
+                    employee.setUnionID(union.indexOf(aux) + 10000);
+                    employee.setUnion(false);
                     System.out.println("Nao registrado no sindicato");
                     break label;
                 }

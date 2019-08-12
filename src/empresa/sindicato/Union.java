@@ -33,7 +33,7 @@ public class Union {
         return new Union(this.union, this.unionTax);
     }
 
-    public static void lauchFee(ArrayList<Employee> list, int id, double fee) {
+    public void lauchFee(ArrayList<Employee> list, int id, double fee) {
         Employee x = list.get(id);
         x.setFundo(x.getFundo() - fee);
         System.out.println("Taxa lançada com sucesso..\n");

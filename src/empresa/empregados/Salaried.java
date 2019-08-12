@@ -22,8 +22,8 @@ public class Salaried extends Employee{
     }
 
     @Override
-    public double calcSalary() {
-        return super.getFundo();
+    public void calcSalary() {
+        setFundo(getMonthlySalary());
     }
 
     @Override

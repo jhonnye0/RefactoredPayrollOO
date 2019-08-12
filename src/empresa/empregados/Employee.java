@@ -12,10 +12,11 @@ public abstract class Employee {
     private double fundo;
     private Schedule schedule;
     private String paymentMethod;
+    private boolean isUnion;
 
     public abstract Employee makeCopy();
 
-    public abstract double calcSalary();
+    public abstract void calcSalary();
 
     public abstract void registerSale(Time time);
 
@@ -75,5 +76,13 @@ public abstract class Employee {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public boolean isUnion() {
+        return isUnion;
+    }
+
+    public void setUnion(boolean union) {
+        isUnion = union;
     }
 }

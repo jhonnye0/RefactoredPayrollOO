@@ -10,7 +10,6 @@ import java.util.*;
 public class EmployeeEngineer {
 
     private EmployeeBuilder employeeBuilder;
-    static Scanner input = new Scanner(System.in);
     ExceptionCatch except = new ExceptionCatch();
 
     public EmployeeEngineer(EmployeeBuilder builder) {
@@ -29,7 +28,7 @@ public class EmployeeEngineer {
 
         System.out.println("\nEmpregado resgitrado com sucesso:\n" +
                 "ID: " + this.employeeBuilder.getEmployee().getId());
-        if(this.employeeBuilder.getEmployee().getUnionID() != -1){
+        if(this.employeeBuilder.getEmployee().isUnion()){
             System.out.print("Union ID: " + this.employeeBuilder.getEmployee().getUnionID());
         }
     }
@@ -56,32 +55,7 @@ public class EmployeeEngineer {
                 System.out.println("Atualizado.\n");
                 break;
             case 3:
-                Employee x = employeeBuilder.getEmployee();
-
-                System.out.print("Tipo de empregado: (Digite o número)\n" +
-                        "1. Horista\n" +
-                        "2. Comissionado\n" +
-                        "3. Assalariado\n");
-
-                int type = except.numcheckException(1,3);
-
-                if(type == 1){
-                    employeeBuilder = (new HourlyBuilder());
-                }else if(type == 2){
-                    employeeBuilder = (new ComissionedBuilder());
-                }else{
-                    employeeBuilder = (new SalariedBuilder());
-                }
-
-                employeeBuilder.getEmployee().setName(x.getName());
-                employeeBuilder.getEmployee().setAdress(x.getAdress());
-                employeeBuilder.getEmployee().setPaymentMethod(x.getPaymentMethod());
-                employeeBuilder.getEmployee().setId(x.getId());
-                employeeBuilder.getEmployee().setUnionID(x.getUnionID());
-                employeeBuilder.getEmployee().setFundo(x.getFundo());
-                employeeBuilder.getEmployee().setSchedule(x.getSchedule());
-                employeeBuilder.buildSalary();
-
+                updateType();
                 System.out.println("Atualizado.\n");
                 break;
             case 4:
@@ -98,22 +72,32 @@ public class EmployeeEngineer {
 
     }
 
-    public void updateType(int id, ArrayList<Employee> list){
+    public void updateType(){
+
+        Employee x = employeeBuilder.getEmployee();
 
         System.out.print("Tipo de empregado: (Digite o número)\n" +
                 "1. Horista\n" +
                 "2. Comissionado\n" +
                 "3. Assalariado\n");
+
         int type = except.numcheckException(1,3);
 
         if(type == 1){
-            employeeBuilder = new HourlyBuilder();
+            employeeBuilder = (new HourlyBuilder());
         }else if(type == 2){
-            employeeBuilder = new ComissionedBuilder();
-        }else {
-            employeeBuilder = new SalariedBuilder();
+            employeeBuilder = (new ComissionedBuilder());
+        }else{
+            employeeBuilder = (new SalariedBuilder());
         }
 
+        employeeBuilder.getEmployee().setName(x.getName());
+        employeeBuilder.getEmployee().setAdress(x.getAdress());
+        employeeBuilder.getEmployee().setPaymentMethod(x.getPaymentMethod());
+        employeeBuilder.getEmployee().setId(x.getId());
+        employeeBuilder.getEmployee().setUnionID(x.getUnionID());
+        employeeBuilder.getEmployee().setFundo(x.getFundo());
+        employeeBuilder.getEmployee().setSchedule(x.getSchedule());
         employeeBuilder.buildSalary();
     }
 

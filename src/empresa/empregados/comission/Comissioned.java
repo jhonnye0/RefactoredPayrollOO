@@ -8,7 +8,7 @@ public class Comissioned extends Salaried {
 
     ExceptionCatch except = new ExceptionCatch();
     private double comPerc;
-    private Sells sells;
+    private Sells sells = new Sells();
 
     @Override
     public Employee makeCopy(){
@@ -23,14 +23,18 @@ public class Comissioned extends Salaried {
         x.setUnionID(super.getUnionID());
 
         ((Comissioned)x).setComPerc(getComPerc());
-
-        //TO DO - - SELLS
+        ((Comissioned)x).sells = this.sells.makeCopy();
         return x;
     }
 
     @Override
-    public double calcSalary() {
-        return 0;
+    public void calcSalary() {
+        int i;
+        double total = 0;
+        for (i = 0; i < 31; i++){
+            total += sells.getDaySale(i);
+        }
+        setFundo(getMonthlySalary() + getComPerc()*total/100);
     }
 
     public void registerSale(Time time){
@@ -41,7 +45,6 @@ public class Comissioned extends Salaried {
         this.sells.registerSale(time.getDAY(), sale);
     }
 
-    @Override
     public void registerPoint() {
         System.out.println("Voce nao esta permitido executar essa operacao");
     }

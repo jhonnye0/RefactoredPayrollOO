@@ -41,10 +41,11 @@ public abstract class Schedule {
         for (Employee e : list) {
             if (e.getSchedule().checkIfisToPay(day, week)) {
 
-                e.setFundo(0);
+                e.calcSalary();
                 System.out.println("Employee de ID [" + e.getId() + "]\n" +
-                        "Foi pago atraves de: " + e.getPaymentMethod());
+                        "Foi pago no valor de: R$"+ e.getFundo() + "\nAtraves de: " + e.getPaymentMethod());
                 System.out.println("--------------------------------");
+                e.setFundo(0);
             }
         }
     }

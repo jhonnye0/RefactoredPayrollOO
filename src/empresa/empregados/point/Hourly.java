@@ -22,15 +22,17 @@ public class Hourly extends Employee {
         x.setFundo(super.getFundo());
         x.setUnionID(super.getUnionID());
         ((Hourly)x).setHourlyWage(getHourlyWage());
+        ((Hourly)x).point.enterEntry(this.point.getEntry());
+        ((Hourly)x).point.insertOut(this.point.getOut());
 
-//        x.point.enterEntry(this.point.getEntry());
-//        x.point.insertOut(this.point.getOut());
         return x;
     }
 
     @Override
-    public double calcSalary() {
-        return 0;
+    public void calcSalary() {
+        if(getDiff() > 8) {
+            setFundo(getFundo() + 1.5*getHourlyWage()*(getDiff() - 8));
+        }
     }
 
     @Override

@@ -2,10 +2,11 @@ package facade;
 
 import builder.scheduleBuilder.*;
 import empresa.agendas.*;
-import empresa.empregados.Employee;
 import empresa.sindicato.Union;
-
-import java.util.ArrayList;
+import memento.CareTaker;
+import memento.Memento;
+import memento.Originator;
+import memento.ReCareTaker;
 import java.util.Scanner;
 
 public class Admin {
@@ -15,9 +16,8 @@ public class Admin {
 
     private int save = 0;
 
-    public int admin(ArrayList<Employee> list, ArrayList<Union> union,
-                     ArrayList<Schedule> agendas, Manager manager, Time time,
-                     int total, Empresa empresa) {
+    public int admin(Manager manager, Time time, int total, Empresa empresa,
+                     CareTaker careTaker, ReCareTaker reCareTaker, Originator originator) {
 
         while (true){
             System.out.println("\n----------------------------------\n");
@@ -34,10 +34,10 @@ public class Admin {
 
             int operation = except.numcheckException(0,8);
 
-//            if (save == 1){
-//                originator.setState(list, union);
-//                unCareTaker.save(originator);
-//            }
+            if (save == 1){
+                originator.setState(new Memento(empresa.getList(), empresa.getUnion()));
+                careTaker.save(originator);
+            }
 
             save = 0;
 
@@ -68,7 +68,7 @@ public class Admin {
                     id = except.numcheckException(0,-1);
 
                     if (manager.haveEmp(empresa.getList(), id)) {
-                        Union.lauchFee(empresa.getList(), id, tax);
+                        new Union(false, 0).lauchFee(empresa.getList(), id, tax);
                         save = 1;
                     }
                     break;
@@ -76,7 +76,7 @@ public class Admin {
                     System.out.print("Qual o ID do empregado?\n");
                     id = except.numcheckException(0,-1);
                     if (manager.haveEmp(empresa.getList(), id)) {
-                        manager.update(empresa.getList(), union, id);
+                        manager.update(empresa.getList(), empresa.getUnion(), id);
                         save = 1;
                     }
                     break;
@@ -86,7 +86,7 @@ public class Admin {
 
                     System.out.println("------------------------------\n" +
                             "Mensais:");
-                    schedule.roolSheet(list, time.getDAY(), time.getWEEK());
+                    schedule.roolSheet(empresa.getList(), time.getDAY(), time.getWEEK());
                     save = 1;
                     break;
                 case 6:
@@ -103,7 +103,7 @@ public class Admin {
                     }
 
                     sEngineer.construct();
-                    agendas.add(sEngineer.getSchedule());
+                    empresa.getAgendas().add(sEngineer.getSchedule());
 
                     System.out.print("Agenda criada com sucesso..\n");
 
@@ -112,7 +112,7 @@ public class Admin {
                     break;
 
                 case 7:
-                    manager.printAllEmployee(list, union);
+                    manager.printAllEmployee(empresa.getList(), empresa.getUnion());
 
                     System.out.print("\n-----------------------------------\n");
                     System.out.print("\nDIGITE ENTER PARA CONTINUAR\n");
@@ -120,33 +120,19 @@ public class Admin {
                     break;
                 case 8:
                     System.out.println("1 - Defazer operacao / 2 - Refazer operacao");
-                    num = except.numcheckException(1,2);
-//                    if(num == 1){
-//                        if(unCareTaker.getIndex() != 0){
-//                            reOriginator.setState(list, union);
-//                            reCareTaker.save(reOriginator);
-//                            unCareTaker.undo(originator);
-//                            list = originator.getEmp();
-//                            empresa.setList(list);
-//
-//                            union = originator.getUn();
-//                            empresa.setUnion(union);
-//                            total = list.size();
-//                        }else{
-//                            System.out.println("Nao ha operacoes disponiveis para fazer");
-//                        }
-//                    }else if (num == 2){
-//                        if(reCareTaker.getIndex() != 0){
-//                            unCareTaker.clear();
-//                            reCareTaker.undo(reOriginator);
-//                            list = reOriginator.getEmp();
-//                            union = reOriginator.getUn();
-//                            total = list.size();
-//                        }else{
-//                            System.out.println("Nao ha operacoes disponiveis para fazer");
-//                        }
-//                    }
-                    input.nextLine();
+
+                    if(except.numcheckException(1,2) == 1){
+                        reCareTaker.save(originator);
+                        careTaker.undo(originator);
+                        empresa.setList(originator.getEmp());
+                        empresa.setUnion(originator.getUn());
+
+                    }else {
+                        reCareTaker.undo(new Originator(new Memento(empresa.getList(), empresa.getUnion())));
+                        empresa.setList(originator.getEmp());
+                        empresa.setUnion(originator.getUn());
+                    }
+
                     System.out.println("Digite ENTER:");
                     input.nextLine();
                     break;

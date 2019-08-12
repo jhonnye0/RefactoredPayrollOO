@@ -1,11 +1,8 @@
 package facade;
 
-import empresa.agendas.MonthlySchedule;
-import empresa.agendas.Schedule;
-import empresa.agendas.Time;
-import empresa.agendas.WeeklySchedule;
+import empresa.agendas.*;
 import empresa.empregados.*;
-import java.util.ArrayList;
+import memento.*;
 import java.util.Scanner;
 
 public class User {
@@ -14,7 +11,7 @@ public class User {
     ExceptionCatch except = new ExceptionCatch();
 
     public void user(Employee usuario, Time time, Manager manager,
-                     ArrayList<Schedule> agendas, Empresa empresa) {
+                     Empresa empresa, CareTaker careTaker, ReCareTaker reCareTaker, Originator originator) {
 
         while(true){
 
@@ -33,13 +30,14 @@ public class User {
                     return;
                 case 1:
                     usuario.registerSale(time);
+                    careTaker.save(originator);
                     break;
                 case 2:
                     usuario.registerPoint(time);
                     break;
                 case 3:
                     Schedule schedule = selectSchedule();
-                    schedule.changeSchedule(agendas, usuario);
+                    schedule.changeSchedule(empresa.getAgendas(), usuario);
                     break;
             }
         }

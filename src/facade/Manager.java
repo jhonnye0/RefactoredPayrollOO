@@ -38,10 +38,7 @@ public class Manager {
 
     public void remove(ArrayList<Employee> list, ArrayList<Union> union, int id, int total) {
 
-        if(union.get(id).isUnion()) {
-            union.get(id).setUnion(false); // unionID
-            union.get(id).setUnionTax(0);
-        }
+        union.remove(id);
         list.remove(id);
         System.out.println("Empregado removido com sucesso..");
     }
@@ -96,11 +93,14 @@ public class Manager {
     }
 
     public void printAllEmployee(ArrayList<Employee> list, ArrayList<Union> union){
+
         int valid = -1;
-        int i;
-        for (i = 0; i < list.size(); i++) {
-            valid++;
-            printEmployee(list, union, i);
+        if(list != null){
+            int i;
+            for (i = 0; i < list.size(); i++) {
+                valid++;
+                printEmployee(list, union, i);
+            }
         }
         if (valid == -1)
             System.out.println("Nao ha empregados registrados..");
