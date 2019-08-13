@@ -120,15 +120,15 @@ class Admin {
                 case 8:
                     System.out.println("1 - Defazer operacao / 2 - Refazer operacao");
 
+                    UROperation urOperation = careTaker;
+
                     if(except.numcheckException(1,2) == 1){
                         reCareTaker.save(originator);
-                        careTaker.undo(originator);
-                        empresa = originator.getCompany();
-
                     }else {
-                        reCareTaker.undo(originator);
-                        empresa = originator.getCompany();
+                        urOperation = reCareTaker;
                     }
+                    urOperation.undo(originator);
+                    empresa = originator.getCompany();
 
                     System.out.println("Digite ENTER:");
                     input.nextLine();

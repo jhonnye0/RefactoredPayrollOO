@@ -8,8 +8,7 @@ class User {
 
     private ExceptionCatch except = new ExceptionCatch();
 
-    void user(Employee usuario, Time time, Manager manager,
-              Empresa empresa, CareTaker careTaker, ReCareTaker reCareTaker, Originator originator) {
+    void user(Employee usuario, Time time, Empresa empresa, CareTaker careTaker, Originator originator) {
 
         while(true){
 

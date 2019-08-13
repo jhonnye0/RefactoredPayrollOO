@@ -2,9 +2,7 @@ package facade;
 
 import empresa.empregados.Employee;
 import empresa.sindicato.Union;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class ExceptionCatch {
 

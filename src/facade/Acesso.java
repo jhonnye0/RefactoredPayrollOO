@@ -58,7 +58,7 @@ public class Acesso {
 
         try {
             if(empresa.getList().get(id) != null){
-                user.user(empresa.getList().get(id), time, new Manager(), empresa, careTaker, reCareTaker, originator);
+                user.user(empresa.getList().get(id), time, empresa, careTaker, originator);
             }
         }catch (Exception e){
             System.out.println("Empregado nao registrado ainda!");

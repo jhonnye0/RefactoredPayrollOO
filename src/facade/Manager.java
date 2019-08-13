@@ -56,7 +56,7 @@ class Manager {
         return valid == 1;
     }
 
-    private void printEmployee(ArrayList<Employee> list, ArrayList<Union> union, int id) {
+    void printEmployee(ArrayList<Employee> list, ArrayList<Union> union, int id) {
 
         if(list.get(id) != null){
             System.out.print("\n-----------------------------------\n");
