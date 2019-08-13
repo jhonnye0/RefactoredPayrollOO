@@ -3,15 +3,13 @@ package facade;
 import empresa.agendas.*;
 import empresa.empregados.*;
 import memento.*;
-import java.util.Scanner;
 
-public class User {
+class User {
 
-    static Scanner input = new Scanner(System.in);
-    ExceptionCatch except = new ExceptionCatch();
+    private ExceptionCatch except = new ExceptionCatch();
 
-    public void user(Employee usuario, Time time, Manager manager,
-                     Empresa empresa, CareTaker careTaker, ReCareTaker reCareTaker, Originator originator) {
+    void user(Employee usuario, Time time, Manager manager,
+              Empresa empresa, CareTaker careTaker, ReCareTaker reCareTaker, Originator originator) {
 
         while(true){
 
@@ -34,6 +32,7 @@ public class User {
                     break;
                 case 2:
                     usuario.registerPoint(time);
+                    careTaker.save(originator);
                     break;
                 case 3:
                     Schedule schedule = selectSchedule();
@@ -43,7 +42,7 @@ public class User {
         }
     }
 
-    public Schedule selectSchedule(){
+    private Schedule selectSchedule(){
         System.out.println("\nDigite o número da agenda que deseja:\n" +
                 "1. Mensal\n" +
                 "2. Semanal\n");

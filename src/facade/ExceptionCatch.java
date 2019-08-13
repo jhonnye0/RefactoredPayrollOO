@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ExceptionCatch {
 
-    static Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
 
     public int numcheckException(int limInf, int limSup) {
 
@@ -57,6 +57,8 @@ public class ExceptionCatch {
         System.out.println("Empregado deseja filiar-se ao sindicato?" +
                 "\n[y] - yes" +
                 "\n[n] - no");
+        Union aux;
+
         label:
         while (true) {
             String in = input.nextLine();
@@ -65,17 +67,12 @@ public class ExceptionCatch {
 
                     System.out.print("Digite a taxa sindical:\n");
                     double synTax = numcheckException(0,-1);
-
-                    Union aux = new Union(true, synTax);
-                    union.add(aux);
-                    employee.setUnionID(union.indexOf(aux) + 10000);
+                    aux = new Union(true, synTax);
                     employee.setUnion(true);
                     break label;
                 }
                 case "n": {
-                    Union aux = new Union(false, 0);
-                    union.add(aux);
-                    employee.setUnionID(union.indexOf(aux) + 10000);
+                    aux = new Union(false, 0);
                     employee.setUnion(false);
                     System.out.println("Nao registrado no sindicato");
                     break label;
@@ -85,5 +82,7 @@ public class ExceptionCatch {
                     break;
             }
         }
+        union.add(employee.getId(), aux);
+        employee.setUnionID(union.indexOf(aux) + 10000);
     }
 }

@@ -11,6 +11,20 @@ public class Empresa {
         private ArrayList<Union> union = new ArrayList<>(100);
         private ArrayList<Schedule> agendas = new ArrayList<>(100);
 
+        public Empresa(ArrayList<Employee> list, ArrayList<Union> union){
+
+            for (Employee e : list) {
+                if(e != null) {
+                    this.list.add(e.getId(), e.makeCopy());
+                    this.union.add(e.getUnionID() - 10000, union.get(e.getUnionID() - 10000).makeCopy());
+                }
+            }
+        }
+
+        public Empresa() {
+
+        }
+
         public ArrayList<Employee> getList() {
             return list;
         }

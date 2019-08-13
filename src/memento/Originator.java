@@ -1,32 +1,24 @@
 package memento;
 
-import empresa.empregados.Employee;
-import empresa.sindicato.Union;
-import java.util.ArrayList;
+import facade.Empresa;
 
 public class Originator {
 
-    Memento memento;
+    Empresa memento;
 
-    public Originator(Memento memento){
-        this.memento = memento;
+    public Originator(Empresa memento){
+        this.memento = new Empresa(memento.getList(), memento.getUnion());
     }
 
-    public ArrayList<Employee> getEmp() {
-        return this.memento.getEmp();
+    public Empresa getCompany(){ return new Empresa(this.memento.getList(), this.memento.getUnion());  }
+
+    public void setState(Empresa memento) {
+        this.memento = new Empresa(memento.getList(), memento.getUnion());
     }
 
-    public ArrayList<Union> getUn() {
-        return this.memento.getUn();
-    }
+    Empresa save(){ return new Empresa(this.memento.getList(), this.memento.getUnion()); }
 
-    public void setState(Memento memento) {
-        this.memento = memento;
-    }
-
-    public Memento save(){ return new Memento(this.memento.getEmp(), this.memento.getUn()); }
-
-    public void undoToLastSave(Memento state){
-        this.memento = state;
+    void undoToLastSave(Empresa state){
+        this.memento = new Empresa(state.getList(), state.getUnion());
     }
 }

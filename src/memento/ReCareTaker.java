@@ -1,38 +1,30 @@
 package memento;
 
-import empresa.empregados.Employee;
-import empresa.sindicato.Union;
+import facade.Empresa;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class ReCareTaker {
+public class ReCareTaker implements UROperation {
 
-    private int index;
-    private List<Memento> states = new ArrayList<>();
+    private List<Empresa> states = new LinkedList<>();
 
     public void save(Originator state){
-        index++;
         this.states.add(state.save());
+        System.out.println("Number of states: (UNDO) " + states.size());
     }
 
     public void undo(Originator state){
 
-        if(index > 1) {
-
-            state.undoToLastSave(states.get(index - 2));
-            index -= 2;
+        if(!isEmpty()){
+            state.undoToLastSave(states.remove(states.size()-1));
         }else{
-            ArrayList<Employee> list = new ArrayList<>(100);
-            ArrayList<Union> union = new ArrayList<>(100);
-            Originator o = new Originator(new Memento(list, union));
-            state.undoToLastSave(o.save());
+            System.out.println("Nao e possivel fazer mais operacoes");
         }
+
+        System.out.println("Number of states: (UNDO) " + states.size());
     }
 
-    public void clear(){
-        index = 0;
-        states.clear();
+    private boolean isEmpty(){
+        return states.size() == 0;
     }
-
 }

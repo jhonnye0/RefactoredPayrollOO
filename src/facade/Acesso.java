@@ -3,13 +3,10 @@ package facade;
 import empresa.agendas.Time;
 import memento.*;
 
-import java.util.Scanner;
-
 public class Acesso {
 
     private int total = 0;
-    static Scanner input = new Scanner(System.in);
-    ExceptionCatch except = new ExceptionCatch();
+    private ExceptionCatch except = new ExceptionCatch();
     private Admin adm = new Admin();
     private User user = new User();
     private Time time = new Time();
@@ -21,7 +18,8 @@ public class Acesso {
 
         Empresa empresa = new Empresa();
         ExceptionCatch except = new ExceptionCatch();
-        originator = new Originator(new Memento(empresa.getList(), empresa.getUnion()));
+        originator = new Originator(empresa);
+        careTaker.save(originator);
 
         while (true)
         {

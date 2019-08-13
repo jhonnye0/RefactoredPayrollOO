@@ -8,12 +8,11 @@ import empresa.empregados.*;
 import empresa.sindicato.Union;
 import java.util.*;
 
-public class Manager {
+class Manager {
 
-    static Scanner input = new Scanner(System.in);
-    ExceptionCatch except = new ExceptionCatch();
+    private ExceptionCatch except = new ExceptionCatch();
 
-    public void add(ArrayList<Employee> list, ArrayList<Union> union, int total){
+    void add(ArrayList<Employee> list, ArrayList<Union> union, int total){
 
         EmployeeEngineer employeeEngineer;
 
@@ -36,18 +35,20 @@ public class Manager {
         list.add(employeeEngineer.getEmployee());
     }
 
-    public void remove(ArrayList<Employee> list, ArrayList<Union> union, int id, int total) {
+    void remove(ArrayList<Employee> list, ArrayList<Union> union, int id, int total) {
 
         union.remove(id);
         list.remove(id);
         System.out.println("Empregado removido com sucesso..");
     }
 
-    public boolean haveEmp(ArrayList<Employee> list, int id) {
+    boolean haveEmp(ArrayList<Employee> list, int id) {
+
         int valid;
         try {
             valid = 1;
             list.get(id);
+            if(list.get(id) == null) valid = 0;
         }catch (IndexOutOfBoundsException e){
             System.out.println("Empregado nao registrado na empresa.");
             valid = 0;
@@ -55,21 +56,24 @@ public class Manager {
         return valid == 1;
     }
 
-    public void printEmployee(ArrayList<Employee> list, ArrayList<Union> union, int id) {
-        System.out.print("\n-----------------------------------\n");
-        Employee x = list.get(id);
-        if(x.getSchedule() != null) {
-            System.out.print(x.toString());
-            System.out.println(x.getSchedule().toString());
-        }
-        if (union.get(id).isUnion()) {
-            System.out.println("Union: true");
-            System.out.println("Union ID: " + x.getUnionID());
-            System.out.println("Union fee: " + union.get(id).getUnionTax());
+    private void printEmployee(ArrayList<Employee> list, ArrayList<Union> union, int id) {
+
+        if(list.get(id) != null){
+            System.out.print("\n-----------------------------------\n");
+            Employee x = list.get(id);
+            if(x.getSchedule() != null) {
+                System.out.print(x.toString());
+                System.out.println(x.getSchedule().toString());
+            }
+            if (list.get(id).isUnion()) {
+                System.out.println("Union: true");
+                System.out.println("Union ID: " + x.getUnionID());
+                System.out.println("Union fee: " + union.get(list.get(id).getUnionID() - 10000).getUnionTax());
+            }
         }
     }
 
-    public void update(ArrayList<Employee> list, ArrayList<Union> union, int id){
+    void update(ArrayList<Employee> list, ArrayList<Union> union, int id){
 
         SalariedBuilder builder = new SalariedBuilder();
         EmployeeEngineer engineer = new EmployeeEngineer(builder);
@@ -92,7 +96,7 @@ public class Manager {
         }
     }
 
-    public void printAllEmployee(ArrayList<Employee> list, ArrayList<Union> union){
+    void printAllEmployee(ArrayList<Employee> list, ArrayList<Union> union){
 
         int valid = -1;
         if(list != null){

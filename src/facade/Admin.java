@@ -3,23 +3,28 @@ package facade;
 import builder.scheduleBuilder.*;
 import empresa.agendas.*;
 import empresa.sindicato.Union;
-import memento.CareTaker;
-import memento.Memento;
-import memento.Originator;
-import memento.ReCareTaker;
+import memento.*;
+
 import java.util.Scanner;
 
-public class Admin {
+class Admin {
 
-    static Scanner input = new Scanner(System.in);
-    ExceptionCatch except = new ExceptionCatch();
+    private Scanner input = new Scanner(System.in);
+    private ExceptionCatch except = new ExceptionCatch();
 
     private int save = 0;
 
-    public int admin(Manager manager, Time time, int total, Empresa empresa,
-                     CareTaker careTaker, ReCareTaker reCareTaker, Originator originator) {
+    int admin(Manager manager, Time time, int total, Empresa empresa,
+              CareTaker careTaker, ReCareTaker reCareTaker, Originator originator) {
 
         while (true){
+
+            if (save == 1){
+                originator.setState(empresa);
+                careTaker.save(originator);
+            }
+            save = 0;
+
             System.out.println("\n----------------------------------\n");
             System.out.println("Digite o numero da operacao que deseja:\n\n" +
                     "0. Finalizar\n" +
@@ -34,18 +39,11 @@ public class Admin {
 
             int operation = except.numcheckException(0,8);
 
-            if (save == 1){
-                originator.setState(new Memento(empresa.getList(), empresa.getUnion()));
-                careTaker.save(originator);
-            }
-
-            save = 0;
-
             switch (operation){
                 case 0:
                     return total;
                 case 1:
-                    manager.add(empresa.getList(), empresa.getUnion(), total);
+                    manager.add(empresa.getList(), empresa.getUnion(), empresa.getList().size());
                     total += 1;
                     save = 1;
 
@@ -102,6 +100,7 @@ public class Admin {
                         sEngineer = new ScheduleEngineer(new WeeklySBuilder());
                     }
 
+                    assert sEngineer != null;
                     sEngineer.construct();
                     empresa.getAgendas().add(sEngineer.getSchedule());
 
@@ -124,13 +123,11 @@ public class Admin {
                     if(except.numcheckException(1,2) == 1){
                         reCareTaker.save(originator);
                         careTaker.undo(originator);
-                        empresa.setList(originator.getEmp());
-                        empresa.setUnion(originator.getUn());
+                        empresa = originator.getCompany();
 
                     }else {
-                        reCareTaker.undo(new Originator(new Memento(empresa.getList(), empresa.getUnion())));
-                        empresa.setList(originator.getEmp());
-                        empresa.setUnion(originator.getUn());
+                        reCareTaker.undo(originator);
+                        empresa = originator.getCompany();
                     }
 
                     System.out.println("Digite ENTER:");
