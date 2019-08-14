@@ -39,7 +39,7 @@ public class Acesso {
                     setTotal(adm.admin(new Manager(), time, total, empresa, careTaker, reCareTaker, originator));
                     break;
                 case 2:
-                    getId(empresa);
+                    getEmployeeData(empresa);
                     break;
                 case 3:
                     time.Do();
@@ -52,7 +52,7 @@ public class Acesso {
         this.total = total;
     }
 
-    private int getId(Empresa empresa) {
+    private int getEmployeeData(Empresa empresa) {
         System.out.println("Digite seu ID:");
         int id = except.numcheckException(0,-1);
 

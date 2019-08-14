@@ -101,6 +101,7 @@ class Admin {
 
                     assert sEngineer != null;
                     sEngineer.construct();
+
                     empresa.getAgendas().add(sEngineer.getSchedule());
 
                     System.out.print("Agenda criada com sucesso..\n");
