@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class SalariedBuilder implements EmployeeBuilder{
 
     private Employee employee;
-    static Scanner input = new Scanner(System.in);
-    ExceptionCatch except = new ExceptionCatch();
+    private Scanner input = new Scanner(System.in);
+    private ExceptionCatch except = new ExceptionCatch();
 
     public SalariedBuilder() {
         this.employee = new Salaried();
@@ -62,8 +62,8 @@ public class SalariedBuilder implements EmployeeBuilder{
     }
 
     @Override
-    public void buildUnion(ArrayList<Union> union) {
-        except.checkSynd(employee, union);
+    public void buildUnion() {
+        except.checkSynd(employee);
     }
 
     @Override

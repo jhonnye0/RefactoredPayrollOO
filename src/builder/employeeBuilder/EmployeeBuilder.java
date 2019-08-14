@@ -1,8 +1,6 @@
 package builder.employeeBuilder;
 
 import empresa.empregados.Employee;
-import empresa.sindicato.Union;
-import java.util.ArrayList;
 
 public interface EmployeeBuilder {
 
@@ -14,7 +12,7 @@ public interface EmployeeBuilder {
 
     void buildSalary();
 
-    void buildUnion(ArrayList<Union> union);
+    void buildUnion();
 
     void buildAdress();
 

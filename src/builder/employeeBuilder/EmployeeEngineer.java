@@ -3,20 +3,19 @@ package builder.employeeBuilder;
 import empresa.empregados.*;
 import empresa.empregados.comission.Comissioned;
 import empresa.empregados.point.Hourly;
-import empresa.sindicato.Union;
 import facade.ExceptionCatch;
 import java.util.*;
 
 public class EmployeeEngineer {
 
     private EmployeeBuilder employeeBuilder;
-    ExceptionCatch except = new ExceptionCatch();
+    private ExceptionCatch except = new ExceptionCatch();
 
     public EmployeeEngineer(EmployeeBuilder builder) {
         employeeBuilder = builder;
     }
 
-    public void construct(ArrayList< Union > union, int total) {
+    public void construct(int total) {
         employeeBuilder.buildName();
         employeeBuilder.buildAdress();
         employeeBuilder.buildPMethod();
@@ -24,7 +23,7 @@ public class EmployeeEngineer {
         employeeBuilder.buildSchedule();
         employeeBuilder.buildId(total);
         this.employeeBuilder.getEmployee().setUnionID(-1);
-        employeeBuilder.buildUnion(union);
+        employeeBuilder.buildUnion();
 
         System.out.println("\nEmpregado resgitrado com sucesso:\n" +
                 "ID: " + this.employeeBuilder.getEmployee().getId());
@@ -33,7 +32,7 @@ public class EmployeeEngineer {
         }
     }
 
-    public void update(ArrayList<Employee> list, ArrayList<Union> union, int id, int operation){
+    public void update(ArrayList<Employee> list, int id, int operation){
 
         if(list.get(id) instanceof Hourly){
             employeeBuilder = new HourlyBuilder();
@@ -63,7 +62,7 @@ public class EmployeeEngineer {
                 System.out.println("Atualizado.\n");
                 break;
             case 5:
-                employeeBuilder.buildUnion(union);
+                employeeBuilder.buildUnion();
                 System.out.println("Atualizado.\n");
                 break;
             default:
@@ -72,7 +71,7 @@ public class EmployeeEngineer {
 
     }
 
-    public void updateType(){
+    private void updateType(){
 
         Employee x = employeeBuilder.getEmployee();
 

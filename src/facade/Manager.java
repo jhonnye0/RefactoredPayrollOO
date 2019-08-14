@@ -12,7 +12,7 @@ class Manager {
 
     private ExceptionCatch except = new ExceptionCatch();
 
-    void add(ArrayList<Employee> list, ArrayList<Union> union, int total){
+    void add(ArrayList<Employee> list, int total){
 
         EmployeeEngineer employeeEngineer;
 
@@ -31,13 +31,11 @@ class Manager {
             employeeEngineer = new EmployeeEngineer(new SalariedBuilder());
         }
 
-        employeeEngineer.construct(union, total);
+        employeeEngineer.construct(total);
         list.add(employeeEngineer.getEmployee());
     }
 
-    void remove(ArrayList<Employee> list, ArrayList<Union> union, int id, int total) {
-
-        union.remove(id);
+    void remove(ArrayList<Employee> list, int id) {
         list.remove(id);
         System.out.println("Empregado removido com sucesso..");
     }
@@ -47,7 +45,6 @@ class Manager {
         int valid;
         try {
             valid = 1;
-            list.get(id);
             if(list.get(id) == null) valid = 0;
         }catch (IndexOutOfBoundsException e){
             System.out.println("Empregado nao registrado na empresa.");
@@ -56,24 +53,19 @@ class Manager {
         return valid == 1;
     }
 
-    void printEmployee(ArrayList<Employee> list, ArrayList<Union> union, int id) {
+    private void printEmployee(Employee x) {
 
-        if(list.get(id) != null){
+        if(x != null && !(x instanceof VAZIO)){
             System.out.print("\n-----------------------------------\n");
-            Employee x = list.get(id);
+
             if(x.getSchedule() != null) {
                 System.out.print(x.toString());
                 System.out.println(x.getSchedule().toString());
             }
-            if (list.get(id).isUnion()) {
-                System.out.println("Union: true");
-                System.out.println("Union ID: " + x.getUnionID());
-                System.out.println("Union fee: " + union.get(list.get(id).getUnionID() - 10000).getUnionTax());
-            }
         }
     }
 
-    void update(ArrayList<Employee> list, ArrayList<Union> union, int id){
+    void update(ArrayList<Employee> list, int id){
 
         SalariedBuilder builder = new SalariedBuilder();
         EmployeeEngineer engineer = new EmployeeEngineer(builder);
@@ -90,22 +82,24 @@ class Manager {
             int operation = except.numcheckException(0,5);
 
             if(operation != 0){
-                engineer.update(list, union, id, operation);
+                engineer.update(list, id, operation);
                 list.set(id, engineer.getEmployee());
             }else break;
         }
     }
 
-    void printAllEmployee(ArrayList<Employee> list, ArrayList<Union> union){
+    void printAllEmployee(ArrayList<Employee> list){
 
         int valid = -1;
+
         if(list != null){
-            int i;
-            for (i = 0; i < list.size(); i++) {
+
+            for (Employee employee : list) {
                 valid++;
-                printEmployee(list, union, i);
+                printEmployee(employee);
             }
         }
+
         if (valid == -1)
             System.out.println("Nao ha empregados registrados..");
     }

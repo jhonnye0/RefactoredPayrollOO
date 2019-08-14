@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class HourlyBuilder implements EmployeeBuilder {
 
     private Employee employee;
-    static Scanner input = new Scanner(System.in);
-    ExceptionCatch except = new ExceptionCatch();
+    private Scanner input = new Scanner(System.in);
+    private ExceptionCatch except = new ExceptionCatch();
 
     public HourlyBuilder(){
         this.employee = new Hourly();
@@ -64,8 +64,8 @@ public class HourlyBuilder implements EmployeeBuilder {
     }
 
     @Override
-    public void buildUnion(ArrayList<Union> union) {
-        except.checkSynd(employee, union);
+    public void buildUnion() {
+        except.checkSynd(employee);
     }
 
     @Override

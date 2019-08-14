@@ -6,14 +6,14 @@ import facade.ExceptionCatch;
 
 public class Comissioned extends Salaried {
 
-    ExceptionCatch except = new ExceptionCatch();
+    private ExceptionCatch except = new ExceptionCatch();
     private double comPerc;
     private Sells sells = new Sells();
 
     @Override
     public Employee makeCopy(){
 
-        Employee x = new Comissioned();
+        Comissioned x = new Comissioned();
         x.setId(this.getId());
         x.setName(this.getName());
         x.setAdress(this.getAdress());
@@ -21,9 +21,10 @@ public class Comissioned extends Salaried {
         x.setSchedule(super.getSchedule().makeCopy());
         x.setFundo(super.getFundo());
         x.setUnionID(super.getUnionID());
-
-        ((Comissioned)x).setComPerc(getComPerc());
-        ((Comissioned)x).sells = this.sells.makeCopy();
+        x.setUnion(isUnion());
+        x.setUnionTax(getUnionTax());
+        x.setComPerc(getComPerc());
+        x.sells = this.sells.makeCopy();
         return x;
     }
 
@@ -49,7 +50,7 @@ public class Comissioned extends Salaried {
         System.out.println("Voce nao esta permitido executar essa operacao");
     }
 
-    public double getComPerc() {
+    private double getComPerc() {
         return comPerc;
     }
 
@@ -64,6 +65,7 @@ public class Comissioned extends Salaried {
                 "\nAdress: " + super.getAdress() +
                 "\nPayment Method: " + super.getPaymentMethod() +
                 "\nSalary: R$" + super.getMonthlySalary() +
+                "\nUnion:" + isUnion() +
                 "\nComission: " + comPerc + "%" +
                 "\nType: Comissionado" +
                 "\nTotal: " + super.getFundo() + "\n";

@@ -3,20 +3,30 @@ package facade;
 import java.util.ArrayList;
 import empresa.agendas.Schedule;
 import empresa.empregados.Employee;
-import empresa.sindicato.Union;
+import empresa.empregados.VAZIO;
 
 public class Empresa {
 
         private ArrayList<Employee> list = new ArrayList<>(100);
-        private ArrayList<Union> union = new ArrayList<>(100);
         private ArrayList<Schedule> agendas = new ArrayList<>(100);
 
-        public Empresa(ArrayList<Employee> list, ArrayList<Union> union){
+        public Empresa(ArrayList<Employee> list){
+
+            int maior = -1;
+            for(Employee e : list){
+                if(e != null) {
+                    if (e.getId() > maior) maior = e.getId();
+                }
+            }
+
+            for (int i = 0; i <= maior; i++){
+                this.list.add(i, new VAZIO());
+            }
 
             for (Employee e : list) {
-                if(e != null) {
+
+                if(e != null && !(e instanceof VAZIO) ) {
                     this.list.add(e.getId(), e.makeCopy());
-                    this.union.add(e.getUnionID() - 10000, union.get(e.getUnionID() - 10000).makeCopy());
                 }
             }
         }
@@ -31,14 +41,6 @@ public class Empresa {
 
         public void setList(ArrayList<Employee> list) {
             this.list = list;
-        }
-
-        public ArrayList<Union> getUnion() {
-            return union;
-        }
-
-        public void setUnion(ArrayList<Union> union) {
-            this.union = union;
         }
 
         public ArrayList<Schedule> getAgendas() {

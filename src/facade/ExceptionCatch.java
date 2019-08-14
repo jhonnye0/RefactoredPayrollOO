@@ -51,11 +51,10 @@ public class ExceptionCatch {
         }
     }
 
-    public void checkSynd(Employee employee, ArrayList<Union> union){
+    public void checkSynd(Employee employee){
         System.out.println("Empregado deseja filiar-se ao sindicato?" +
                 "\n[y] - yes" +
                 "\n[n] - no");
-        Union aux;
 
         label:
         while (true) {
@@ -65,12 +64,11 @@ public class ExceptionCatch {
 
                     System.out.print("Digite a taxa sindical:\n");
                     double synTax = numcheckException(0,-1);
-                    aux = new Union(true, synTax);
                     employee.setUnion(true);
+                    employee.setUnionTax(synTax);
                     break label;
                 }
                 case "n": {
-                    aux = new Union(false, 0);
                     employee.setUnion(false);
                     System.out.println("Nao registrado no sindicato");
                     break label;
@@ -80,7 +78,6 @@ public class ExceptionCatch {
                     break;
             }
         }
-        union.add(employee.getId(), aux);
-        employee.setUnionID(union.indexOf(aux) + 10000);
+        employee.setUnionID(employee.getId() + 10000);
     }
 }

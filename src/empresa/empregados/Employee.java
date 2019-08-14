@@ -2,8 +2,9 @@ package empresa.empregados;
 
 import empresa.agendas.Schedule;
 import empresa.agendas.Time;
+import empresa.sindicato.Union;
 
-public abstract class Employee {
+public abstract class Employee extends Union {
 
     private int id;
     private int unionID;
@@ -84,5 +85,10 @@ public abstract class Employee {
 
     public void setUnion(boolean union) {
         isUnion = union;
+    }
+
+    public void lauchFee(double fee) {
+        setFundo(getFundo() - fee);
+        System.out.println("Taxa lançada com sucesso..\n");
     }
 }

@@ -2,7 +2,6 @@ package facade;
 
 import builder.scheduleBuilder.*;
 import empresa.agendas.*;
-import empresa.sindicato.Union;
 import memento.*;
 
 import java.util.Scanner;
@@ -43,7 +42,7 @@ class Admin {
                 case 0:
                     return total;
                 case 1:
-                    manager.add(empresa.getList(), empresa.getUnion(), empresa.getList().size());
+                    manager.add(empresa.getList(), empresa.getList().size());
                     total += 1;
                     save = 1;
 
@@ -55,7 +54,7 @@ class Admin {
                     int id = except.numcheckException(0,-1);
 
                     if(manager.haveEmp(empresa.getList(), id)){
-                        manager.remove(empresa.getList(), empresa.getUnion(), id, total);
+                        manager.remove(empresa.getList(), id);
                         save = 1;
                     }
                     break;
@@ -66,7 +65,7 @@ class Admin {
                     id = except.numcheckException(0,-1);
 
                     if (manager.haveEmp(empresa.getList(), id)) {
-                        new Union(false, 0).lauchFee(empresa.getList(), id, tax);
+                        empresa.getList().get(id).lauchFee(tax);
                         save = 1;
                     }
                     break;
@@ -74,7 +73,7 @@ class Admin {
                     System.out.print("Qual o ID do empregado?\n");
                     id = except.numcheckException(0,-1);
                     if (manager.haveEmp(empresa.getList(), id)) {
-                        manager.update(empresa.getList(), empresa.getUnion(), id);
+                        manager.update(empresa.getList(), id);
                         save = 1;
                     }
                     break;
@@ -111,7 +110,7 @@ class Admin {
                     break;
 
                 case 7:
-                    manager.printAllEmployee(empresa.getList(), empresa.getUnion());
+                    manager.printAllEmployee(empresa.getList());
 
                     System.out.print("\n-----------------------------------\n");
                     System.out.print("\nDIGITE ENTER PARA CONTINUAR\n");

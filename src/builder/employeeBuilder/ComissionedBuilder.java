@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class ComissionedBuilder implements EmployeeBuilder {
 
     private Employee employee;
-    static Scanner input = new Scanner(System.in);
-    ExceptionCatch except = new ExceptionCatch();
+    private Scanner input = new Scanner(System.in);
+    private ExceptionCatch except = new ExceptionCatch();
 
     public ComissionedBuilder(){
         this.employee = new Comissioned();
@@ -63,8 +63,8 @@ public class ComissionedBuilder implements EmployeeBuilder {
     }
 
     @Override
-    public void buildUnion(ArrayList<Union> union) {
-        except.checkSynd(employee, union);
+    public void buildUnion() {
+        except.checkSynd(employee);
     }
 
     @Override

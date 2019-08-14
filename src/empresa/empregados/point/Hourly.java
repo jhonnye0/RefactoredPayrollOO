@@ -6,14 +6,14 @@ import facade.ExceptionCatch;
 
 public class Hourly extends Employee {
 
-    ExceptionCatch except = new ExceptionCatch();
+    private ExceptionCatch except = new ExceptionCatch();
     private double hourlyWage;
     private MarkPoint point = new MarkPoint();
 
     @Override
     public Employee makeCopy(){
 
-        Employee x = new Hourly();
+        Hourly x = new Hourly();
         x.setId(this.getId());
         x.setName(this.getName());
         x.setAdress(this.getAdress());
@@ -21,9 +21,11 @@ public class Hourly extends Employee {
         x.setSchedule(super.getSchedule().makeCopy());
         x.setFundo(super.getFundo());
         x.setUnionID(super.getUnionID());
-        ((Hourly)x).setHourlyWage(getHourlyWage());
-        ((Hourly)x).point.enterEntry(this.point.getEntry());
-        ((Hourly)x).point.insertOut(this.point.getOut());
+        x.setUnion(isUnion());
+        x.setUnionTax(getUnionTax());
+        x.setHourlyWage(getHourlyWage());
+        x.point.enterEntry(this.point.getEntry());
+        x.point.insertOut(this.point.getOut());
 
         return x;
     }
@@ -52,11 +54,11 @@ public class Hourly extends Employee {
         else markOutPoint(time.getHOUR());
     }
 
-    public void markEntracePoint(int hour){
+    private void markEntracePoint(int hour){
         this.point.enterEntry(hour);
     }
 
-    public void markOutPoint(int hour){
+    private void markOutPoint(int hour){
         this.point.insertOut(hour);
 
         if(point.getDiff() > 8){
@@ -73,11 +75,12 @@ public class Hourly extends Employee {
                 "\nAdress: " + super.getAdress() +
                 "\nPayment Method: " + super.getPaymentMethod() +
                 "\nSalary/Hour: R$" + hourlyWage +
+                "\nUnion:" + isUnion() +
                 "\nType: Horista" +
                 "\nTotal: " + super.getFundo() + "\n";
     }
 
-    public double getHourlyWage() {
+    private double getHourlyWage() {
         return hourlyWage;
     }
 
@@ -85,7 +88,7 @@ public class Hourly extends Employee {
         this.hourlyWage = hourlyWage;
     }
 
-    public int getDiff(){
+    private int getDiff(){
         System.out.println("Horas trabalhadas:" + point.getDiff() + "hrs");
         return point.getDiff();
     }

@@ -9,7 +9,7 @@ public class Salaried extends Employee{
     @Override
     public Employee makeCopy(){
 
-        Employee x = new Salaried();
+        Salaried x = new Salaried();
         x.setId(this.getId());
         x.setName(this.getName());
         x.setAdress(this.getAdress());
@@ -17,7 +17,9 @@ public class Salaried extends Employee{
         x.setSchedule(super.getSchedule().makeCopy());
         x.setFundo(super.getFundo());
         x.setUnionID(super.getUnionID());
-        ((Salaried)x).setMonthlySalary(getMonthlySalary());
+        x.setUnion(isUnion());
+        x.setUnionTax(getUnionTax());
+        x.setMonthlySalary(getMonthlySalary());
         return x;
     }
 
@@ -36,7 +38,7 @@ public class Salaried extends Employee{
         System.out.println("Voce nao esta permitido executar essa operacao");
     }
 
-    public double getMonthlySalary() {
+    protected double getMonthlySalary() {
         return monthlySalary;
     }
 
@@ -51,6 +53,7 @@ public class Salaried extends Employee{
                 "\nAdress: " + super.getAdress() +
                 "\nPayment Method: " + super.getPaymentMethod() +
                 "\nSalary: R$" + monthlySalary +
+                "\nUnion:" + isUnion() +
                 "\nType: Salariado"+
                 "\nTotal: R$" + super.getFundo() + "\n";
     }
