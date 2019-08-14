@@ -14,7 +14,7 @@ public class Acesso {
     private ReCareTaker reCareTaker = new ReCareTaker();
     private Originator originator;
 
-    public void acess() {
+    public void access() {
 
         Empresa empresa = new Empresa();
         ExceptionCatch except = new ExceptionCatch();
